@@ -1,5 +1,7 @@
 package com.example.jpa.demo1.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
@@ -14,6 +16,8 @@ public class Employees implements Serializable {
     @Column(name = "emp_no")
     private int empNo;
 
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birth_date")
     private Calendar birthDate;
 
@@ -26,6 +30,8 @@ public class Employees implements Serializable {
     @Column(name = "gender")
     private String gender;
 
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "hire_date")
     private Calendar hireDate;
 
