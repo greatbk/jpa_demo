@@ -1,14 +1,15 @@
-package com.example.jpa.demo1.service.titles;
+package com.example.jpa.demo1.mvc.service.titles;
 
 import com.example.jpa.demo1.entity.Titles;
 import com.example.jpa.demo1.repository.TitlesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class TitlesServiceImpl implements TitlesService {
 
     @Autowired
@@ -16,9 +17,7 @@ public class TitlesServiceImpl implements TitlesService {
 
     @Override
     public List<Titles> findByEmpNo(int empNo) {
-        List<Titles> list = new ArrayList<>();
-        titlesRepository.findByEmpNo(empNo).forEach(row -> list.add(row));
-        return list;
+        return titlesRepository.findByEmpNo(empNo);
     }
 }
 

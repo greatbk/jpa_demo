@@ -1,65 +1,63 @@
 package com.example.jpa.demo1.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.example.jpa.demo1.common.Constrant;
+import com.example.jpa.demo1.entity.id.TitlesId;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Calendar;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "titles")
-@IdClass(TitlesId.class)
 public class Titles implements Serializable {
 
-    @Id
-    @Column(name = "emp_no")
-    private int empNo;
+    @EmbeddedId
+    private TitlesId id;
 
-    @Id
-    @Column(name = "title")
-    private String title;
+    @MapsId("empNo")
+    @ManyToOne
+    @JoinColumn(name = "emp_no")
+    private Employees employees;
 
-    @Id
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "from_date")
-    private Calendar fromDate;
-
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "to_date")
-    private Calendar toDate;
+    private LocalDate toDate;
 
-    public int getEmpNo() {
-        return empNo;
+    @Transient
+    private String strToDate;
+
+    public TitlesId getId() {
+        return id;
     }
 
-    public void setEmpNo(int empNo) {
-        this.empNo = empNo;
+    public void setId(TitlesId id) {
+        this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Employees getEmployees() {
+        return employees;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setEmployees(Employees employees) {
+        this.employees = employees;
     }
 
-    public Calendar getFromDate() {
-        return fromDate;
-    }
-
-    public void setFromDate(Calendar fromDate) {
-        this.fromDate = fromDate;
-    }
-
-    public Calendar getToDate() {
+    public LocalDate getToDate() {
         return toDate;
     }
 
-    public void setToDate(Calendar toDate) {
+    public void setToDate(LocalDate toDate) {
         this.toDate = toDate;
+    }
+
+    public String getStrToDate() {
+        if(toDate != null) {
+            setStrToDate(toDate.format(Constrant.defaultDateFormat));
+        }
+        return strToDate;
+    }
+
+    public void setStrToDate(String strToDate) {
+        this.strToDate = strToDate;
     }
 }
 

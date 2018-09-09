@@ -1,4 +1,4 @@
-package com.example.jpa.demo1.service;
+package com.example.jpa.demo1.mvc.service;
 
 import com.example.jpa.demo1.entity.Article;
 import com.example.jpa.demo1.repository.ArticleRepository;

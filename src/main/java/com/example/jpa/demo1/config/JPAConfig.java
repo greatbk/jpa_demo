@@ -32,14 +32,15 @@ public class JPAConfig {
         lcemfb.setJpaVendorAdapter(getJpaVendorAdapter());
         lcemfb.setDataSource(getDataSource());
         lcemfb.setPersistenceUnitName("myJpaPersistenceUnit");
-        lcemfb.setPackagesToScan("com.example.jpa.demo1");
+        lcemfb.setPackagesToScan("com.example.jpa.demo1.entity");
         lcemfb.setJpaProperties(jpaProperties());
         return lcemfb;
     }
 
     @Bean
     public JpaVendorAdapter getJpaVendorAdapter() {
-        JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+        HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+        adapter.setShowSql(true);
         return adapter;
     }
 

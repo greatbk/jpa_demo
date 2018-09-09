@@ -1,7 +1,7 @@
-package com.example.jpa.demo1.controller;
+package com.example.jpa.demo1.mvc.controller;
 
 import com.example.jpa.demo1.entity.Titles;
-import com.example.jpa.demo1.service.titles.TitlesService;
+import com.example.jpa.demo1.mvc.service.titles.TitlesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

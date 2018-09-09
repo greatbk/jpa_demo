@@ -1,4 +1,4 @@
-package com.example.jpa.demo1.service.employees;
+package com.example.jpa.demo1.mvc.service.employees;
 
 import com.example.jpa.demo1.entity.Employees;
 

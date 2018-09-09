@@ -1,14 +1,15 @@
-package com.example.jpa.demo1.service.employees;
+package com.example.jpa.demo1.mvc.service.employees;
 
 import com.example.jpa.demo1.entity.Employees;
 import com.example.jpa.demo1.repository.EmployeesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class EmployeesServiceImpl implements EmployeesService {
 
     @Autowired
@@ -21,8 +22,6 @@ public class EmployeesServiceImpl implements EmployeesService {
 
     @Override
     public List<Employees> findByLastName(String lastName) {
-        List<Employees> list = new ArrayList<>();
-        employeesRepository.findByLastName(lastName).forEach(row -> list.add(row));
-        return list;
+        return employeesRepository.findByLastName(lastName);
     }
 }

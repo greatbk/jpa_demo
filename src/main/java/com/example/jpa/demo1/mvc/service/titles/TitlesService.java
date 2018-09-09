@@ -1,4 +1,4 @@
-package com.example.jpa.demo1.service.titles;
+package com.example.jpa.demo1.mvc.service.titles;
 
 import com.example.jpa.demo1.entity.Titles;
 

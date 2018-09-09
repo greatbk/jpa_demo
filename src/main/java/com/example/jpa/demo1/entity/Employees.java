@@ -1,25 +1,22 @@
 package com.example.jpa.demo1.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.example.jpa.demo1.common.Constrant;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "employees")
 public class Employees implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     @Column(name = "emp_no")
     private int empNo;
 
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birth_date")
-    private Calendar birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "first_name")
     private String firstName;
@@ -30,14 +27,14 @@ public class Employees implements Serializable {
     @Column(name = "gender")
     private String gender;
 
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "hire_date")
-    private Calendar hireDate;
+    private LocalDate hireDate;
 
-    @OneToMany
-    @JoinColumn(name = "emp_no")
-    private List<Titles> titles;
+    @Transient
+    private String strBirthDate;
+
+    @Transient
+    private String strHireDate;
 
     public int getEmpNo() {
         return empNo;
@@ -47,11 +44,11 @@ public class Employees implements Serializable {
         this.empNo = empNo;
     }
 
-    public Calendar getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Calendar birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -79,19 +76,33 @@ public class Employees implements Serializable {
         this.gender = gender;
     }
 
-    public Calendar getHireDate() {
+    public LocalDate getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(Calendar hireDate) {
+    public void setHireDate(LocalDate hireDate) {
         this.hireDate = hireDate;
     }
 
-    public List<Titles> getTitles() {
-        return titles;
+    public String getStrBirthDate() {
+        if(birthDate != null) {
+            setStrBirthDate(birthDate.format(Constrant.defaultDateFormat));
+        }
+        return strBirthDate;
     }
 
-    public void setTitles(List<Titles> titles) {
-        this.titles = titles;
+    public void setStrBirthDate(String strBirthDate) {
+        this.strBirthDate = strBirthDate;
+    }
+
+    public String getStrHireDate() {
+        if(hireDate != null) {
+            setStrHireDate(hireDate.format(Constrant.defaultDateFormat));
+        }
+        return strHireDate;
+    }
+
+    public void setStrHireDate(String strHireDate) {
+        this.strHireDate = strHireDate;
     }
 }
